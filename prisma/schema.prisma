@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model comments {
+  id          Int       @id(map: "comments_pk") @default(autoincrement())
+  user        Int
+  round       Int
+  created_at  DateTime? @db.Timestamp(6)
+  modified_at DateTime? @db.Timestamp(6)
+  text        String
+}
+
+model matches {
+  id                             Int      @id(map: "matches_pk") @default(autoincrement())
+  timestamp                      DateTime @db.Timestamp(6)
+  round                          Int      @db.SmallInt
+  home_team                      Int?
+  away_team                      Int?
+  teams_matches_home_teamToteams teams?   @relation("matches_home_teamToteams", fields: [home_team], references: [id], onUpdate: NoAction, map: "matches_teams_null_fk")
+  teams_matches_away_teamToteams teams?   @relation("matches_away_teamToteams", fields: [away_team], references: [id], onUpdate: NoAction, map: "matches_teams_null_fk_away")
+}
+
+model teams {
+  id                               Int       @id(map: "teams_pk") @default(autoincrement())
+  name                             String    @db.VarChar
+  points                           Int       @default(0)
+  matches_matches_home_teamToteams matches[] @relation("matches_home_teamToteams")
+  matches_matches_away_teamToteams matches[] @relation("matches_away_teamToteams")
+}
