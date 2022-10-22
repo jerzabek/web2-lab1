@@ -2,9 +2,11 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import Link from 'next/link'
 import React from 'react'
+import useIsAdmin from '../../utils/isAdmin'
 
 function Header() {
   const { user, isLoading } = useUser()
+  const isAdmin = useIsAdmin()
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,15 +37,20 @@ function Header() {
             {!isLoading ? (
               user ? (
                 <>
-                  <Link href="/profile" className="nav-link">
+                  {isAdmin && (
+                    <Link href="/create" className="nav-link me-2">
+                      <a className="nav-link text-success">Nova tekma</a>
+                    </Link>
+                  )}
+                  <Link href="/profile" className="nav-link me-2">
                     <a className="nav-link">Profil</a>
                   </Link>
-                  <a href="/api/auth/logout" className="nav-link ms-2">
+                  <a href="/api/auth/logout" className="nav-link">
                     Odjava
                   </a>
                 </>
               ) : (
-                <a href="/api/auth/login" className="nav-link ms-2">
+                <a href="/api/auth/login" className="nav-link">
                   Prijava
                 </a>
               )

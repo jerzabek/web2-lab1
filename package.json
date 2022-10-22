@@ -11,9 +11,17 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.9.2",
     "@prisma/client": "^4.5.0",
+    "@types/react-select": "^5.0.1",
+    "@types/styled-components": "^5.1.26",
+    "moment": "^2.29.4",
     "next": "12.3.1",
+    "next-superjson-plugin": "^0.4.8",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-feather": "^2.0.10",
+    "react-select": "^5.5.4",
+    "styled-components": "^5.3.6",
+    "superjson": "^1.11.0"
   },
   "devDependencies": {
     "@types/node": "18.11.2",

@@ -17,13 +17,15 @@ model comments {
 }
 
 model matches {
-  id                             Int      @id(map: "matches_pk") @default(autoincrement())
-  timestamp                      DateTime @db.Timestamp(6)
-  round                          Int      @db.SmallInt
-  home_team                      Int?
-  away_team                      Int?
-  teams_matches_home_teamToteams teams?   @relation("matches_home_teamToteams", fields: [home_team], references: [id], onUpdate: NoAction, map: "matches_teams_null_fk")
-  teams_matches_away_teamToteams teams?   @relation("matches_away_teamToteams", fields: [away_team], references: [id], onUpdate: NoAction, map: "matches_teams_null_fk_away")
+  id            Int      @id(map: "matches_pk") @default(autoincrement())
+  timestamp     DateTime @db.Timestamp(6)
+  round         Int      @db.SmallInt
+  home_team     Int?
+  away_team     Int?
+  home_score    Int?
+  away_score    Int?
+  the_home_team teams?   @relation("matches_home_teamToteams", fields: [home_team], references: [id], onUpdate: NoAction, map: "matches_teams_null_fk")
+  the_away_team teams?   @relation("matches_away_teamToteams", fields: [away_team], references: [id], onUpdate: NoAction, map: "matches_teams_null_fk_away")
 }
 
 model teams {
