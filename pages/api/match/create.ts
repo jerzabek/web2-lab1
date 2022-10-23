@@ -1,6 +1,8 @@
+import { getSession } from '@auth0/nextjs-auth0'
 import moment from 'moment'
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../src/lib/prisma'
+import { ROLES } from '../../../src/utils/consts'
 
 interface CreatePostRequest extends NextApiRequest {
   body: {
@@ -18,7 +20,12 @@ export default async function handle(req: CreatePostRequest, res: NextApiRespons
 
   const { homeTeam, awayTeam, homeScore, awayScore, timestamp, round } = req.body
 
-  // const session = getSession(req, res)
+  const session = getSession(req, res)
+
+  if (!session?.user[ROLES]?.includes('admin')) {
+    res.status(400).json({ success: false })
+    return
+  }
 
   try {
     await prisma.matches.create({

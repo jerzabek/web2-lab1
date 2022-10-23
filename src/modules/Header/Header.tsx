@@ -30,7 +30,7 @@ function Header() {
             <Link href="/">
               <a className="nav-link me-2">Utakmice</a>
             </Link>
-            <Link href="/bodovi" className="nav-link">
+            <Link href="/points" className="nav-link">
               <a className="nav-link me-auto">Bodovi</a>
             </Link>
 

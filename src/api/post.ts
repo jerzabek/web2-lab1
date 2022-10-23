@@ -1,4 +1,4 @@
-const postJson = (url: string, body: object): Promise<any> => {
+const postJson = (url: string, body: object = {}): Promise<any> => {
   return fetch(url, {
     method: 'POST',
     headers: {

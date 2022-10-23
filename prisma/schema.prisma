@@ -9,7 +9,7 @@ datasource db {
 
 model comments {
   id          Int       @id(map: "comments_pk") @default(autoincrement())
-  user        Int
+  user        String
   round       Int
   created_at  DateTime? @db.Timestamp(6)
   modified_at DateTime? @db.Timestamp(6)

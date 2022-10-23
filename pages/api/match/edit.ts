@@ -19,8 +19,6 @@ export default async function handle(req: EditPostRequest, res: NextApiResponse)
 
   const { id, homeTeam, awayTeam, homeScore, awayScore, timestamp, round } = req.body
 
-  // const session = getSession(req, res)
-
   try {
     await prisma.matches.update({
       data: {

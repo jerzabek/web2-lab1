@@ -13,7 +13,6 @@ interface Props {
 }
 
 function EditMatch({ match }: Props) {
-  
   const router = useRouter()
 
   const { id } = router.query
