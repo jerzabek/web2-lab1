@@ -38,6 +38,15 @@ function EditMatch({ match }: Props) {
 }
 
 export const getServerSideProps = getServerSidePropsWrapper(async ctx => {
+  if (isNaN(Number(ctx.params?.id))) {
+    return {
+      redirect: {
+        destination: '/',
+      },
+      props: {},
+    }
+  }
+
   const match = await prisma.matches.findFirst({
     where: {
       id: Number(ctx.params?.id),
